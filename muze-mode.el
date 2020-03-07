@@ -1,4 +1,4 @@
-;; muze-mode.el --- Major mode for the Muze programming language.
+;;; muze-mode.el --- Major mode for the Muze programming language.
 
 ;; Copyright (C) 2019-2020 Alex Covington
 
