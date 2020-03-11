@@ -1,4 +1,4 @@
-;;; muze-mode.el --- Major mode for the Muze programming language.
+;;; muze-mode.el --- Major mode for the Muze programming language
 
 ;; Copyright (C) 2019-2020 Alex Covington
 
@@ -6,6 +6,8 @@
 ;; Maintainer: Alex Covington <alex@covington.tech>
 ;; Created: May 28, 2019
 ;; Keywords: languages muze
+;; Version: 1.0
+;; Homepage: https://github.com/ACov96/muze-mode
 
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -62,8 +64,7 @@
         `(
           (,x-types-regexp . font-lock-type-face)
           (,x-keywords-regexp . font-lock-keyword-face)
-          (,x-operators-regexp . font-lock-constant-face)
-          )))
+          (,x-operators-regexp . font-lock-constant-face))))
 
 ;; Indentation
 (defvar muze-indent-value 1)
