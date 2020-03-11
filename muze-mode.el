@@ -43,7 +43,7 @@
     table))
 
 ;; Font lock
-(setq muze-mode-keywords
+(defvar muze-mode-keywords
       (let* (
              ;; define several categories of keywords
              (x-keywords '("break" "continue" "fa" "af" "if" "elif" "else" "fi"
