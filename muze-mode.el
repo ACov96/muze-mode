@@ -6,7 +6,6 @@
 ;; Maintainer: Alex Covington <alex@covington.tech>
 ;; Created: May 28, 2019
 ;; Keywords: languages muze
-;; Homepage: https://gitlab.cs.wwu.edu/covinga/language-design-research
 
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -21,6 +20,16 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+
+;;; Commentary:
+;; This is a major mode to go alongside the Muze language project.  None
+;; of use are Elisp gurus, so forgive any weirdness you might see.  We don't
+;; know why it's like this either...
+
+;; Muze Homepage: https://gitlab.cs.wwu.edu/covinga/language-design-research
+
+;;; Code:
+
 (defconst muze-mode-syntax-table
   (let ((table (make-syntax-table)))
     ;; string delimiter
@@ -28,7 +37,7 @@
 
     ;; single line comments
     (modify-syntax-entry ?/ ". 12" table)
-    (modify-syntax-entry ?\n ">" table) 
+    (modify-syntax-entry ?\n ">" table)
 
     ;; TODO: multi line comments
     table))
@@ -59,7 +68,7 @@
 ;; Indentation
 (defvar muze-indent-value 1)
 (defun muze-first-word ()
-  "Return the first word on the current line"
+  "Return the first word on the current line."
   (car (split-string (thing-at-point 'line t))))
 
 (defun muze-prev-line-first-word ()
