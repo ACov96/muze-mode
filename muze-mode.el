@@ -59,11 +59,11 @@
 ;; Indentation
 (defvar muze-indent-value 1)
 (defun muze-first-word ()
-  "Returns the first word on the current line"
+  "Return the first word on the current line"
   (car (split-string (thing-at-point 'line t))))
 
 (defun muze-prev-line-first-word ()
-  "Gets and returns the first word of the previous line."
+  "Get and return the first word of the previous line."
   (save-excursion
     (forward-line -1)
     (while (progn (beginning-of-line) (looking-at "[[:space:]]*$"))
@@ -71,7 +71,7 @@
     (muze-first-word)))
 
 (defun muze-prev-line-indent ()
-  "Returns the indentation of the previous line that isn't whitespace."
+  "Return the indentation of the previous line that isn't whitespace."
   (save-excursion
     (forward-line -1)
     (while (progn (beginning-of-line) (looking-at "[[:space:]]*$"))
@@ -79,13 +79,13 @@
     (current-indentation)))
 
 (defun muze-prev-line-spaces ()
-  "Returns the number of spaces in the previous line"
+  "Return the number of spaces in the previous line."
   (save-excursion
     (forward-line -1)
     (current-indentation)))
 
 (defun muze-get-last-mod-indent ()
-  "Returns the indentation for the last line that starts with mod"
+  "Return the indentation for the last line that start with mod."
   (save-excursion
     (let ((dom-count 1))
       (while (> dom-count 0)
@@ -97,7 +97,7 @@
       (current-indentation))))
 
 (defun muze-get-last-fun-indent ()
-  "Returns the indentation for the last line that starts with mod"
+  "Return the indentation for the last line that start with mod."
   (save-excursion
     (let ((nuf-count 1))
       (while (> nuf-count 0)
@@ -109,7 +109,7 @@
       (current-indentation))))
 
 (defun muze-get-last-loop-indent ()
-  "Returns the indentation for the last line that starts with loop"
+  "Return the indentation for the last line that start with loop."
   (save-excursion
     (let ((pool-count 1))
       (while (> pool-count 0)
@@ -121,7 +121,7 @@
       (current-indentation))))
 
 (defun muze-get-last-if-indent ()
-  "Returns the indentation for the last line that starts with loop"
+  "Return the indentation for the last line that start with if."
   (save-excursion
     (let ((fi-count 1))
       (while (> fi-count 0)
@@ -133,7 +133,7 @@
       (current-indentation))))
 
 (defun muze-nuf-to-fun ()
-  "If current line starts with nuf token, move to matching fun token."
+  "If current line start with nuf token, move to matching fun token."
   (when (string-equal (muze-first-word) "nuf")
     (while (not (string-equal (muze-first-word) "fun"))
       (forward-line -1)
@@ -142,7 +142,7 @@
         (muze-nuf-to-fun)))))
 
 (defun muze-dom-to-mod ()
-  "If current line starts with dom token, move to matching mod token."
+  "If current line start with dom token, move to matching mod token."
   (when (string-equal (muze-first-word) "dom")
     (while (not (string-equal (muze-first-word) "mod"))
       (forward-line -1)
@@ -151,7 +151,7 @@
         (muze-dom-to-mod)))))
 
 (defun muze-get-current-scope-indent ()
-  "Returns the indentation for the current scope (aligned with first line that has a mod or fun token as the first word)"
+  "Return the indentation for the current scope (aligned with first line that has a mod or fun token as the first word)."
   (save-excursion
       (while (not (or (string-equal (muze-first-word) "mod")
                       (string-equal (muze-first-word) "fun")))
@@ -165,7 +165,7 @@
       (current-indentation)))
 
 (defun muze-get-indent-offset ()
-  "Returns the number of spaces to indent the current line"
+  "Return the number of spaces to indent the current line."
   (interactive)
   (while (save-excursion (beginning-of-line) (looking-at "[[:space:]]*$"))
     (forward-line -1))
@@ -192,7 +192,7 @@
           (t (muze-prev-line-indent)))))
 
 (defun muze-clear-leading-whitespace ()
-  "Deletes leading whitespace on the current line"
+  "Deletes leading whitespace on the current line."
   (beginning-of-line)
   (when (string= (string (char-after (point))) " ")
       (let ((regex "[ \t]+"))
@@ -200,7 +200,7 @@
         (replace-match "" nil nil))))
 
 (defun muze-mode-indent-line ()
-  "Indent current line. This is pretty hacky, accepting any improvement."
+  "Indent current line.  This is pretty hacky, accepting any improvement."
   (interactive)
   (save-excursion
   (muze-clear-leading-whitespace)
@@ -212,6 +212,8 @@
   :syntax-table muze-mode-syntax-table
   (setq font-lock-defaults '((muze-mode-keywords))
         indent-line-function 'muze-mode-indent-line)
-  (font-lock-fontify-buffer))
+  (font-lock-ensure))
 
 (provide 'muze-mode)
+
+;;; muze-mode.el ends here
